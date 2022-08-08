@@ -4,4 +4,5 @@ export interface WindowToCreate {
     regularPrice: number;
     chemicalPrice: number;
     postConstructionPrice: number;
+    imgPath: string;
 }

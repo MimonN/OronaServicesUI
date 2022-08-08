@@ -9,26 +9,39 @@ import { WindowsService } from 'src/app/services/windows.service';
   styleUrls: ['./add-window.component.css']
 })
 export class AddWindowComponent implements OnInit {
-  createWindowRequest: WindowToCreate = {
-    windowType: undefined,
-    orderNumber: undefined,
-    regularPrice: undefined,
-    chemicalPrice: undefined,
-    postConstructionPrice: undefined
-  };
+  createWindowRequest: WindowToCreate;
+  windowType: string;
+  orderNumber: number;
+  regularPrice: number;
+  chemicalPrice: number;
+  postConstructionPrice: number;
+  response: {dbPath: ''};
 
   constructor(private windowService: WindowsService, private router: Router) { }
 
   ngOnInit(): void {
   }
 
-  createWindow() {
-    this.windowService.createWindow(this.createWindowRequest)
-    .subscribe({
-      next: (window) => {
-        this.router.navigate(['windows']);
-      }
-    });
+  uploadFinished = (event) => {
+    this.response = event;
+  }
+
+  onCreate = () => {
+    this.createWindowRequest = {
+      windowType: this.windowType,
+      orderNumber: this.orderNumber,
+      regularPrice: this.regularPrice,
+      chemicalPrice: this.chemicalPrice,
+      postConstructionPrice: this.postConstructionPrice,
+      imgPath: this.response.dbPath
+    }
+
+      this.windowService.createWindow(this.createWindowRequest)
+      .subscribe({
+        next: (window) => {
+          this.router.navigate(['windows']);
+        }
+      });
   }
 
 }

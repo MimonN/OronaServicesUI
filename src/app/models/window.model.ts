@@ -5,5 +5,6 @@ export interface Window {
     regularPrice: number;
     chemicalPrice: number;
     postConstructionPrice: number;
+    imgPath: string;
 
 }

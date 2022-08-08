@@ -12,6 +12,7 @@
         <thead>
             <tr>
                 <th>Window Type</th>
+                <th>Image</th>
                 <th>Regular Price</th>
                 <th>Chemical Price</th>
                 <th>Post-Construction Price</th>
@@ -20,6 +21,7 @@
         </thead>
         <tbody *ngFor="let window of windows">
             <td>{{window.windowType}}</td>
+            <td><img [src]="createImgPath(window.imgPath)" alt="window image"></td>
             <td>{{window.regularPrice}}</td>
             <td>{{window.chemicalPrice}}</td>
             <td>{{window.postConstructionPrice}}</td>

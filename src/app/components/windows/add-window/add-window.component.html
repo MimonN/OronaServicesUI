@@ -1,27 +1,29 @@
 <div class="container">
     <h1>Add New Window Type</h1>
-        <form #form="ngForm" (ngSubmit)="createWindow()">
+        <form>
             <div class="mb-3">
               <label for="windowType" class="form-label">Window Type</label>
-              <input type="text" class="form-control" id="windowType" name="windowType" [(ngModel)]="createWindowRequest.windowType" >
+              <input type="text" class="form-control" id="windowType" name="windowType" [(ngModel)]="windowType" >
             </div>
             <div class="mb-3">
                 <label for="orderNumber" class="form-label">Order Number</label>
-                <input type="number" class="form-control" id="orderNumber" name="orderNumber" [(ngModel)]="createWindowRequest.orderNumber">
+                <input type="number" class="form-control" id="orderNumber" name="orderNumber" [(ngModel)]="orderNumber">
               </div>
             <div class="mb-3">
                 <label for="regularPrice" class="form-label">Regular Price</label>
-                <input type="number" class="form-control" id="regularPrice" name="regularPrice" [(ngModel)]="createWindowRequest.regularPrice">
+                <input type="number" class="form-control" id="regularPrice" name="regularPrice" [(ngModel)]="regularPrice">
             </div>
               <div class="mb-3">
                 <label for="chemicalPrice" class="form-label">Chemical Price</label>
-                <input type="number" class="form-control" id="chemicalPrice" name="chemicalPrice" [(ngModel)]="createWindowRequest.chemicalPrice">
+                <input type="number" class="form-control" id="chemicalPrice" name="chemicalPrice" [(ngModel)]="chemicalPrice">
             </div>
               <div class="mb-3">
                 <label for="postConstructionPrice" class="form-label">Post-Construction Price</label>
-                <input type="number" class="form-control" id="postConstructionPrice" name="postConstructionPrice" [(ngModel)]="createWindowRequest.postConstructionPrice">
+                <input type="number" class="form-control" id="postConstructionPrice" name="postConstructionPrice" [(ngModel)]="postConstructionPrice">
             </div>
+
+            <app-upload (onUploadFinished)="uploadFinished($event)"></app-upload>
             
-            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="submit" class="btn btn-primary" (click)="onCreate()">Create</button>
         </form>
 </div>
