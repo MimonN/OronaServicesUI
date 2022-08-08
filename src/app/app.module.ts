@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AddWindowComponent } from './components/windows/add-window/add-window.component';
 import { FormsModule } from '@angular/forms';
 import { EditWindowComponent } from './components/windows/edit-window/edit-window.component';
+import { UploadComponent } from './components/upload/upload.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { EditWindowComponent } from './components/windows/edit-window/edit-windo
     NavBarComponent,
     WindowsListComponent,
     AddWindowComponent,
-    EditWindowComponent
+    EditWindowComponent,
+    UploadComponent
   ],
   imports: [
     BrowserModule,
