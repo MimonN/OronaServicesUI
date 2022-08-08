@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="row align-items-center justify-content-between">
+        <div class="col">
+            <h1>Windows</h1>
+        </div>
+        <div class="col text-end">
+            <button type="button" class="btn btn-primary" routerLink="/window/add">Add Window</button>
+        </div>
+    </div>
+    
+    <table class="table" *ngIf="windows && windows.length > 0">
+        <thead>
+            <tr>
+                <th>Window Type</th>
+                <th>Regular Price</th>
+                <th>Chemical Price</th>
+                <th>Post-Construction Price</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let window of windows">
+            <td>{{window.windowType}}</td>
+            <td>{{window.regularPrice}}</td>
+            <td>{{window.chemicalPrice}}</td>
+            <td>{{window.postConstructionPrice}}</td>
+            <td><a [routerLink]="['/window', 'edit', window.id]">View</a></td>
+        </tbody>
+    </table>
+    <p *ngIf="!windows || windows.length <= 0">No Windows Created</p>
+</div>

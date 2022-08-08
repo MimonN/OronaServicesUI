@@ -1,0 +1,27 @@
+<div class="container">
+    <h1>Add New Window Type</h1>
+        <form #form="ngForm" (ngSubmit)="createWindow()">
+            <div class="mb-3">
+              <label for="windowType" class="form-label">Window Type</label>
+              <input type="text" class="form-control" id="windowType" name="windowType" [(ngModel)]="createWindowRequest.windowType" >
+            </div>
+            <div class="mb-3">
+                <label for="orderNumber" class="form-label">Order Number</label>
+                <input type="number" class="form-control" id="orderNumber" name="orderNumber" [(ngModel)]="createWindowRequest.orderNumber">
+              </div>
+            <div class="mb-3">
+                <label for="regularPrice" class="form-label">Regular Price</label>
+                <input type="number" class="form-control" id="regularPrice" name="regularPrice" [(ngModel)]="createWindowRequest.regularPrice">
+            </div>
+              <div class="mb-3">
+                <label for="chemicalPrice" class="form-label">Chemical Price</label>
+                <input type="number" class="form-control" id="chemicalPrice" name="chemicalPrice" [(ngModel)]="createWindowRequest.chemicalPrice">
+            </div>
+              <div class="mb-3">
+                <label for="postConstructionPrice" class="form-label">Post-Construction Price</label>
+                <input type="number" class="form-control" id="postConstructionPrice" name="postConstructionPrice" [(ngModel)]="createWindowRequest.postConstructionPrice">
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+</div>
