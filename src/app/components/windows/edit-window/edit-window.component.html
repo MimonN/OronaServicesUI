@@ -26,6 +26,8 @@
                 <input type="number" class="form-control" id="postConstructionPrice" name="postConstructionPrice" [(ngModel)]="windowDetails.postConstructionPrice">
             </div>
             
+            <app-update-image (onUploadFinished)="uploadFinished($event)"></app-update-image>
+
             <button type="submit" class="btn btn-primary">Save</button>
             <button type="button" class="btn btn-danger" (click)="deleteWindow(windowDetails.id)">Delete</button>
         </form>

@@ -10,6 +10,7 @@ import { AddWindowComponent } from './components/windows/add-window/add-window.c
 import { FormsModule } from '@angular/forms';
 import { EditWindowComponent } from './components/windows/edit-window/edit-window.component';
 import { UploadComponent } from './components/upload/upload.component';
+import { UpdateImageComponent } from './components/upload/update-image/update-image.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { UploadComponent } from './components/upload/upload.component';
     WindowsListComponent,
     AddWindowComponent,
     EditWindowComponent,
-    UploadComponent
+    UploadComponent,
+    UpdateImageComponent
   ],
   imports: [
     BrowserModule,

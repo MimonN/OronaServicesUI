@@ -1,19 +1,26 @@
 import { HttpClient, HttpErrorResponse, HttpEventType } from '@angular/common/http';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-upload',
-  templateUrl: './upload.component.html',
-  styleUrls: ['./upload.component.css']
+  selector: 'app-update-image',
+  templateUrl: './update-image.component.html',
+  styleUrls: ['./update-image.component.css']
 })
-export class UploadComponent implements OnInit {
+export class UpdateImageComponent implements OnInit {
   progress: number;
   message: string;
+  id: number;
   @Output() public onUploadFinished = new EventEmitter();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.route.paramMap.subscribe({
+      next: (params) => {
+        this.id = parseInt(params.get('id'));
+      }
+    })
   }
 
   uploadFile = (files) => {
@@ -25,7 +32,7 @@ export class UploadComponent implements OnInit {
     const formData = new FormData();
     formData.append('file', fileToUpload, fileToUpload.name);
 
-    this.http.post('https://localhost:5001/api/upload/upload', formData, {reportProgress: true, observe: 'events'})
+    this.http.post('https://localhost:5001/api/upload/updateimage/' + this.id, formData, {reportProgress: true, observe: 'events'})
       .subscribe({
         next: (event) => {
           if(event.type === HttpEventType.UploadProgress)

@@ -10,6 +10,7 @@ import { WindowsService } from 'src/app/services/windows.service';
 })
 export class EditWindowComponent implements OnInit {
   windowDetails: Window;
+  response: {dbPath: ''};
 
   constructor(private route: ActivatedRoute, private windowsService: WindowsService, private router: Router) { }
 
@@ -30,7 +31,12 @@ export class EditWindowComponent implements OnInit {
     })
   }
 
-  updateWindow() {
+  uploadFinished = (event) => {
+    this.response = event;
+  }
+
+    updateWindow() {
+    this.windowDetails.imgPath = this.response.dbPath;
     this.windowsService.updateWindow(this.windowDetails.id, this.windowDetails).subscribe({
       next: (response) => {
         this.router.navigate(['windows']);
