@@ -53,4 +53,8 @@ export class EditWindowComponent implements OnInit {
     })
   }
 
+  public createImgPath = (serverPath: string) => { 
+    return `https://localhost:5001/${serverPath}`; 
+  }
+
 }

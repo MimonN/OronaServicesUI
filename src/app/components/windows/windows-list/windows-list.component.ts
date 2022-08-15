@@ -1,5 +1,7 @@
+import { NgForOf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Window } from 'src/app/models/window.model';
+import { WindowCalc } from 'src/app/models/windowCalc.model';
 import { WindowsService } from 'src/app/services/windows.service';
 
 @Component({
@@ -8,7 +10,8 @@ import { WindowsService } from 'src/app/services/windows.service';
   styleUrls: ['./windows-list.component.css']
 })
 export class WindowsListComponent implements OnInit {
-  windows: Window[] = [];
+  windows: WindowCalc[] = [];
+  totalPrice: number = 0;
 
   constructor(private windowService: WindowsService) { }
 
@@ -24,8 +27,7 @@ export class WindowsListComponent implements OnInit {
     })
   }
 
-  public createImgPath = (serverPath: string) => { 
-    return `https://localhost:5001/${serverPath}`; 
+  addToTotalPrice(value: number){
+    this.totalPrice += value;
   }
-
 }

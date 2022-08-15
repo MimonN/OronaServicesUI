@@ -8,25 +8,18 @@
         </div>
     </div>
     
-    <table class="table" *ngIf="windows && windows.length > 0">
-        <thead>
-            <tr>
-                <th>Window Type</th>
-                <th>Image</th>
-                <th>Regular Price</th>
-                <th>Chemical Price</th>
-                <th>Post-Construction Price</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody *ngFor="let window of windows">
-            <td>{{window.windowType}}</td>
-            <td><img [src]="createImgPath(window.imgPath)" alt="window image"></td>
-            <td>{{window.regularPrice}}</td>
-            <td>{{window.chemicalPrice}}</td>
-            <td>{{window.postConstructionPrice}}</td>
-            <td><a [routerLink]="['/window', 'edit', window.id]">View</a></td>
-        </tbody>
-    </table>
+    <div class="text-center">
+        <h1>Price Calculator</h1>
+        <h1>Total: {{totalPrice | currency}}</h1>
+    </div>
+    
+
     <p *ngIf="!windows || windows.length <= 0">No Windows Created</p>
+    <div class="container row row row-cols-xl-2 row-cols-1" *ngIf="windows && windows.length > 0">
+        <div class="border p-4" *ngFor="let window of windows">
+            <app-window-card [window]="window" (totalWindowTypePriceEvent)="addToTotalPrice($event)"></app-window-card>
+    </div>
 </div>
+        
+    
+

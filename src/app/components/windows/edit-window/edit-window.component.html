@@ -1,34 +1,63 @@
 <div class="container">
     <h1>Edit Window Type</h1>
         <form #form="ngForm" *ngIf="windowDetails" (ngSubmit)="updateWindow()">
-            <div class="mb-3">
-                <label for="id" class="form-label">Id</label>
-                <input type="number" class="form-control" disabled id="id" name="id" [(ngModel)]="windowDetails.id">
-              </div>
-            <div class="mb-3">
-              <label for="windowType" class="form-label">Window Type</label>
-              <input type="text" class="form-control" id="windowType" name="windowType" [(ngModel)]="windowDetails.windowType">
-            </div>
-            <div class="mb-3">
-                <label for="orderNumber" class="form-label">Order Number</label>
-                <input type="number" class="form-control" id="orderNumber" name="orderNumber" [(ngModel)]="windowDetails.orderNumber">
-              </div>
-            <div class="mb-3">
-                <label for="regularPrice" class="form-label">Regular Price</label>
-                <input type="number" class="form-control" id="regularPrice" name="regularPrice" [(ngModel)]="windowDetails.regularPrice">
-            </div>
-              <div class="mb-3">
-                <label for="chemicalPrice" class="form-label">Chemical Price</label>
-                <input type="number" class="form-control" id="chemicalPrice" name="chemicalPrice" [(ngModel)]="windowDetails.chemicalPrice">
-            </div>
-              <div class="mb-3">
-                <label for="postConstructionPrice" class="form-label">Post-Construction Price</label>
-                <input type="number" class="form-control" id="postConstructionPrice" name="postConstructionPrice" [(ngModel)]="windowDetails.postConstructionPrice">
-            </div>
-            
-            <app-update-image (onUploadFinished)="uploadFinished($event)"></app-update-image>
 
-            <button type="submit" class="btn btn-primary">Save</button>
-            <button type="button" class="btn btn-danger" (click)="deleteWindow(windowDetails.id)">Delete</button>
+          <div class="row">
+            <mat-form-field class="col-8 p-2"  appearance="fill">
+              <mat-label>Window Type</mat-label>
+              <input matInput required type="text"
+                    name="windowType" ngModel #windowType="ngModel"
+                    minlength="3" maxlength="60" [(ngModel)]="windowDetails.windowType">
+              <mat-error *ngIf="windowType.errors?.required">Window Type is mandatory.</mat-error>
+              <mat-error *ngIf="windowType.errors?.minlength">
+                Window Type must have minimum {{windowType.errors?.requiredLength}} chars, but it only has {{windowType.errors?.minlength.actualLength}}.
+              </mat-error>
+            </mat-form-field>
+  
+            <mat-form-field class="col-4 p-2" appearance="fill">
+              <mat-label>Order Number</mat-label>
+              <input matInput type="number" name="orderNumber" ngModel #orderNumber="ngModel" 
+                    min="1" [(ngModel)]="windowDetails.orderNumber">
+              <mat-error *ngIf="orderNumber.value<1">Order Number must be >= 1.</mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="row">
+            <div class="col-md-5">
+              <img [src]="createImgPath(windowDetails.imgPath)" alt="window image">
+            </div>
+            <div class="col-md-7">
+              <mat-form-field class="col price" appearance="fill">
+                <mat-label>$ Regular Price</mat-label>
+                <input matInput required type="number" name="regularPrice"
+                      ngModel #regularPrice="ngModel" min="1" [(ngModel)]="windowDetails.regularPrice">
+                <mat-error *ngIf="regularPrice.value<1">Price is mandatory must be >=1</mat-error>
+              </mat-form-field>
+    
+              <mat-form-field class="col price" appearance="fill">
+                <mat-label>$ Chemical Price</mat-label>
+                <input matInput required type="number" name="chemicalPrice"
+                      ngModel #chemicalPrice="ngModel" min="1" [(ngModel)]="windowDetails.chemicalPrice">
+                <mat-error *ngIf="chemicalPrice.value<1">Price is mandatory and must be >=1</mat-error>
+              </mat-form-field>
+    
+              <mat-form-field class="col price" appearance="fill">
+                <mat-label>$ Post-Construction Price</mat-label>
+                <input matInput required type="number" name="postConstructionPrice"
+                      ngModel #postConstructionPrice="ngModel" min="1" [(ngModel)]="windowDetails.postConstructionPrice">
+                <mat-error *ngIf="postConstructionPrice.value<1">Price is mandatory must be >=1</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          
+
+          
+
+          
+
+          <app-update-image (onUploadFinished)="uploadFinished($event)"></app-update-image>
+          <button type="submit" class="btn btn-primary">Save</button>
+          <button type="button" class="btn btn-danger" (click)="deleteWindow(windowDetails.id)">Delete</button>
+
         </form>
 </div>

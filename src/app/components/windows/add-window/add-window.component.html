@@ -1,29 +1,48 @@
 <div class="container">
     <h1>Add New Window Type</h1>
-        <form>
-            <div class="mb-3">
-              <label for="windowType" class="form-label">Window Type</label>
-              <input type="text" class="form-control" id="windowType" name="windowType" [(ngModel)]="windowType" >
-            </div>
-            <div class="mb-3">
-                <label for="orderNumber" class="form-label">Order Number</label>
-                <input type="number" class="form-control" id="orderNumber" name="orderNumber" [(ngModel)]="orderNumber">
-              </div>
-            <div class="mb-3">
-                <label for="regularPrice" class="form-label">Regular Price</label>
-                <input type="number" class="form-control" id="regularPrice" name="regularPrice" [(ngModel)]="regularPrice">
-            </div>
-              <div class="mb-3">
-                <label for="chemicalPrice" class="form-label">Chemical Price</label>
-                <input type="number" class="form-control" id="chemicalPrice" name="chemicalPrice" [(ngModel)]="chemicalPrice">
-            </div>
-              <div class="mb-3">
-                <label for="postConstructionPrice" class="form-label">Post-Construction Price</label>
-                <input type="number" class="form-control" id="postConstructionPrice" name="postConstructionPrice" [(ngModel)]="postConstructionPrice">
-            </div>
+        <form #windowForm="ngForm">
+
+          <mat-form-field class="col-8 p-2"  appearance="fill">
+            <mat-label>Window Type</mat-label>
+            <input matInput required type="text"
+                  name="windowType" ngModel #windowType="ngModel"
+                  minlength="3" maxlength="60">
+            <mat-error *ngIf="windowType.errors?.required">Window Type is mandatory.</mat-error>
+            <mat-error *ngIf="windowType.errors?.minlength">
+              Window Type must have minimum {{windowType.errors?.requiredLength}} chars, but it only has {{windowType.errors?.minlength.actualLength}}.
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="col-4 p-2" appearance="fill">
+            <mat-label>Order Number</mat-label>
+            <input matInput type="number" name="orderNumber" ngModel #orderNumber="ngModel" min="1">
+            <mat-error *ngIf="orderNumber.value<1">Order Number must be >= 1.</mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="col-4 p-2" appearance="fill">
+            <mat-label>$ Regular Price</mat-label>
+            <input matInput required type="number" name="regularPrice"
+                  ngModel #regularPrice="ngModel" min="1">
+            <mat-error *ngIf="regularPrice.value<1">Price is mandatory must be >=1</mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="col-4 p-2" appearance="fill">
+            <mat-label>$ Chemical Price</mat-label>
+            <input matInput required type="number" name="chemicalPrice"
+                  ngModel #chemicalPrice="ngModel" min="1">
+            <mat-error *ngIf="chemicalPrice.value<1">Price is mandatory and must be >=1</mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="col-4 p-2" appearance="fill">
+            <mat-label>$ Post-Construction Price</mat-label>
+            <input matInput required type="number" name="postConstructionPrice"
+                  ngModel #postConstructionPrice="ngModel" min="1">
+            <mat-error *ngIf="postConstructionPrice.value<1">Price is mandatory must be >=1</mat-error>
+          </mat-form-field>
 
             <app-upload (onUploadFinished)="uploadFinished($event)"></app-upload>
             
-            <button type="submit" class="btn btn-primary" (click)="onCreate()">Create</button>
+            <button type="submit" class="btn btn-primary" (click)="onCreate(windowForm.value)"
+                    [disabled]="!windowForm.valid">Create</button>
         </form>
 </div>

@@ -26,13 +26,13 @@ export class AddWindowComponent implements OnInit {
     this.response = event;
   }
 
-  onCreate = () => {
+  onCreate = (value) => {
     this.createWindowRequest = {
-      windowType: this.windowType,
-      orderNumber: this.orderNumber,
-      regularPrice: this.regularPrice,
-      chemicalPrice: this.chemicalPrice,
-      postConstructionPrice: this.postConstructionPrice,
+      windowType: value.windowType,
+      orderNumber: value.orderNumber,
+      regularPrice: value.regularPrice,
+      chemicalPrice: value.chemicalPrice,
+      postConstructionPrice: value.postConstructionPrice,
       imgPath: this.response.dbPath
     }
 
