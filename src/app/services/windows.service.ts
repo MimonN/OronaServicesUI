@@ -33,4 +33,8 @@ export class WindowsService {
   deleteWindow(id: number): Observable<Window> {
     return this.http.delete<Window>(this.baseApiUrl + '/api/window/deletewindow/' + id)
   }
+
+  public getClaims = (route: string) => {
+    return this.http.get(this.baseApiUrl + route);
+  }
 }

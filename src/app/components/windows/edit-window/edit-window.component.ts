@@ -36,7 +36,10 @@ export class EditWindowComponent implements OnInit {
   }
 
     updateWindow() {
-    this.windowDetails.imgPath = this.response.dbPath;
+      if(this.response != null) {
+        this.windowDetails.imgPath = this.response.dbPath;
+      }
+    
     this.windowsService.updateWindow(this.windowDetails.id, this.windowDetails).subscribe({
       next: (response) => {
         this.router.navigate(['windows']);

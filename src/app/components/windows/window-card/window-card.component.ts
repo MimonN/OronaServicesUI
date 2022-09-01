@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { WindowCalc } from 'src/app/models/windowCalc.model';
+import { AuthenticationService } from 'src/app/shared/services/authentication.service';
 
 @Component({
   selector: 'app-window-card',
@@ -11,11 +12,14 @@ export class WindowCardComponent implements OnInit {
   @Input() window: WindowCalc;
   @Output() totalWindowTypePriceEvent = new EventEmitter<number>();
   totalWindowTypePrice: number = 0;
+  isUserAuthenticated: boolean;
 
-  constructor() { }
+  constructor(private authService: AuthenticationService) { }
 
   ngOnInit(): void {
     this.setDefaultValue();
+
+    this.isUserAuthenticated = this.authService.isUserAuthenticated();
   }
 
   setDefaultValue() {

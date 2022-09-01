@@ -1,0 +1,65 @@
+<div class="container pt-5 text-center">
+    <button type="button" class="btn btn-success" routerLink="contactus-list">All Requests</button>
+    <h2 class="pt-5">Please Fill In Request Callback Form</h2>
+
+        <form #callbackForm="ngForm">
+
+            <mat-form-field class="col-12 col-md-7"  appearance="fill">
+                <mat-label>Name</mat-label>
+                <input matInput required type="text"
+                      name="name" ngModel #name="ngModel">
+                <mat-error *ngIf="name.errors?.required">Name is mandatory</mat-error>
+            </mat-form-field>
+            
+            <mat-form-field class="col-12 col-md-7" appearance="fill">
+                <mat-label>Phone Number</mat-label>
+                <input matInput required mask="(000) 000-0000" placeholder="Ex. (000) 000-0000" value="" ngModel #phoneNumber="ngModel" name="phoneNumber">
+                <mat-error *ngIf="phoneNumber.errors">Enter valid phone number</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="col-12 col-md-7" appearance="fill">
+                <mat-label>Email</mat-label>
+                <input matInput type="email" email required ngModel #email="ngModel" name="email">
+                <mat-error *ngIf="email.errors?.required">Email is mandatory</mat-error>
+                <mat-error *ngIf="email.errors?.email">Please enter a valid email address.</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="col-12 col-md-7" appearance="fill">
+                <mat-label>Address</mat-label>
+                <textarea matInput ngModel #address="ngModel" name="address"></textarea>
+            </mat-form-field>
+
+            <mat-form-field class="col-12 col-md-7" appearance="fill">
+                <mat-label>Is it a home or business?</mat-label>
+                <mat-select disableRipple matInput ngModel #isItAHomeOrBusiness="ngModel" name="isItAHomeOrBusiness">
+                  <mat-option value="Home">Home</mat-option>
+                  <mat-option value="Business">Business</mat-option>
+                </mat-select>
+              </mat-form-field>
+
+            <mat-form-field class="col-12 col-md-7" appearance="fill">
+                <mat-label>Message</mat-label>
+                <textarea matInput ngModel name="message" #message="ngModel"></textarea>
+            </mat-form-field>
+
+            <mat-form-field class="col-12 col-md-7" appearance="fill">
+                <mat-label>How Did You Hear About Us?</mat-label>
+                <mat-select disableRipple matInput ngModel #howDidYouHearAboutUs="ngModel" name="howDidYouHearAboutUs">
+                  <mat-option value="Referral from a friend">Referral from a friend</mat-option>
+                  <mat-option value="Referral from a business">Referral from a business</mat-option>
+                  <mat-option value="Internet search engine">Internet search engine</mat-option>
+                  <mat-option value="Mail/Postcard/Flyer">Mail/Postcard/Flyer</mat-option>
+                  <mat-option value="Saw a company window cleaner">Saw a company window cleaner</mat-option>
+                  <mat-option value="Saw a company vehicle">Saw a company vehicle</mat-option>
+                  <mat-option value="Other">Other</mat-option>
+                </mat-select>
+              </mat-form-field>
+    
+            <div col-12>
+                <button type="submit" class="btn btn-primary" (click)="onRequest(callbackForm.value)"
+                [disabled]="!callbackForm.valid">Request</button>
+            </div>
+            
+        </form>
+    
+</div>

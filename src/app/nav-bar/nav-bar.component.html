@@ -1,12 +1,22 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-black">
     <div class="container">
       <a class="navbar-brand" routerLink="windows">Orona Services</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed"
+          [attr.aria-expanded]="!isCollapsed" aria-controls="collapseNav">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="collapse navbar-collapse d-lg-flex justify-content-lg-between" id="collapseNav" [collapse]="!isCollapsed" [isAnimated]="true">
         <div class="navbar-nav">
-          <a class="nav-link active" routerLink="windows">Windows</a>
+          <a class="nav-link" routerLink="/windows" routerLinkActive="active">Price Calculator</a>
+          <a class="nav-link" routerLink="/contactform" routerLinkActive="active">Request Callback</a>
+          <a class="nav-link" routerLink="/privacy" routerLinkActive="active">Privacy</a>
+        </div>
+        <div *ngIf="!isUserAuthenticated" class="navbar-nav">
+          <a class="nav-link" routerLink="/authentication/login" routerLinkActive="active">Login</a>
+          <a class="nav-link" routerLink="/authentication/register" routerLinkActive="active">Register</a>
+        </div>
+        <div *ngIf="isUserAuthenticated" class="navbar-nav">
+          <a class="nav-link" routerLink (click)="logout()">Logout</a>
         </div>
       </div>
     </div>

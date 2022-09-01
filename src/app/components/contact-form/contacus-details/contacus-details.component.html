@@ -1,0 +1,56 @@
+<div class="container text-center">
+    <h1 class="pt-5">Request Details</h1>
+
+    <div class="row">
+      <p>Requested: <b>{{contactUsDetails.createTime | date : "medium"}}</b></p>
+      <p *ngIf="!contactUsDetails.editTime === null">Edited: <b>{{contactUsDetails.editTime | date : "medium"}}</b></p>
+      <p>Message: <b>{{contactUsDetails.message}}</b></p>
+      <p>Hot did you hear about us?: <b>{{contactUsDetails.howDidYouHearAboutUs}}</b></p>
+      <p>Is is a home or business?: <b>{{contactUsDetails.isItAHomeOrBusiness}}</b></p>
+    </div>
+
+    <form #requestDetailsForm="ngForm" class="pt-4">
+
+        <mat-form-field class="col-12 col-md-7"  appearance="fill">
+            <mat-label>Name</mat-label>
+            <input matInput required type="text"
+                  name="name" [(ngModel)]="contactUsDetails.name" #name="ngModel">
+            <mat-error *ngIf="name.errors?.required">Name is mandatory</mat-error>
+        </mat-form-field>
+        
+        <mat-form-field class="col-12 col-md-7" appearance="fill">
+            <mat-label>Phone Number</mat-label>
+            <input matInput required mask="(000) 000-0000" placeholder="Ex. (000) 000-0000" value="" [(ngModel)]="contactUsDetails.phone" #phoneNumber="ngModel" name="phoneNumber">
+            <mat-error *ngIf="phoneNumber.errors">Enter valid phone number</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="col-12 col-md-7" appearance="fill">
+            <mat-label>Email</mat-label>
+            <input matInput type="email" email required [(ngModel)]="contactUsDetails.email" #email="ngModel" name="email">
+            <mat-error *ngIf="email.errors?.required">Email is mandatory</mat-error>
+            <mat-error *ngIf="email.errors?.email">Please enter a valid email address.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="col-12 col-md-7" appearance="fill">
+            <mat-label>Address</mat-label>
+            <textarea matInput [(ngModel)]="contactUsDetails.address" #address="ngModel" name="address"></textarea>
+        </mat-form-field>
+
+          <mat-form-field class="col-12 col-md-7" appearance="fill">
+            <mat-label>State</mat-label>
+            <mat-select disableRipple [(ngModel)]="contactUsDetails.state" #state="ngModel" name="state">
+              <mat-option value="New">New</mat-option>
+              <mat-option value="In Process">In Process</mat-option>
+              <mat-option value="Closed">Closed</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="col-12 col-md-7" appearance="fill">
+            <mat-label>Note</mat-label>
+            <textarea matInput [(ngModel)]="contactUsDetails.note" name="note" #note="ngModel"></textarea>
+          </mat-form-field>
+
+          
+
+    </form>
+</div>

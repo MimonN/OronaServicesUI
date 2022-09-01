@@ -1,7 +1,7 @@
-<form #windowPriceCalculation="ngForm" (ngSubmit)="addToTotal(windowPriceCalculation)">
+<form #windowPriceCalculation="ngForm" (ngSubmit)="addToTotal(windowPriceCalculation)" class="pt-5">
     <div class="row">
         <div class="col-md-4 text-center">
-            <img [src]="createImgPath(window.imgPath)" alt="window image">
+            <img class="img-fluid" [src]="createImgPath(window.imgPath)" alt="window image">
         </div>
         <div class="row col-md-8">
             <div class="row col text-center">
@@ -20,7 +20,7 @@
                 <div class="col-2 d-flex justify-content-between">
                     <span type="button" (click)="minusOneR(window.regularPriceQuantity)" class="text-start"><i class="material-icons">remove_circle</i></span>
                     <span class="text-center">
-                        <input type="number" class="text-center" style="width: 45px;" 
+                        <input type="number" disabled class="text-center" style="width: 45px;" 
                             name="rpq" [(ngModel)]="window.regularPriceQuantity" #rpq="ngModel" />
                     </span>
                     <span type="button" (click)="plusOneR()" class="text-end"><i class="material-icons">add_circle</i></span>
@@ -38,7 +38,8 @@
                 </div>
                 <div class="col-2 d-flex justify-content-between">
                     <span type="button" (click)="minusOneC(window.chemicalPriceQuantity)" class="text-start"><i class="material-icons">remove_circle</i></span>
-                    <span class="text-center"><input class="text-center" style="width: 45px;" 
+                    <span class="text-center">
+                        <input class="text-center" disabled style="width: 45px;" 
                         name="cpq" [(ngModel)]="window.chemicalPriceQuantity" #cpq="ngModel" /></span>
                     <span type="button" (click)="plusOneC()" class="text-end"><i class="material-icons">add_circle</i></span>
                 </div>
@@ -55,7 +56,8 @@
                 </div>
                 <div class="col-2 d-flex justify-content-between">
                     <span type="button" (click)="minusOneP(window.postConstructionPriceQuantity)" class="text-start"><i class="material-icons">remove_circle</i></span>
-                    <span class="text-center"><input class="text-center" style="width: 45px;"
+                    <span class="text-center">
+                        <input class="text-center" disabled style="width: 45px;"
                         name="ppq" [(ngModel)]="window.postConstructionPriceQuantity" #ppq="ngModel" /></span>
                     <span type="button" (click)="plusOneP()" class="text-end"><i class="material-icons">add_circle</i></span>
                 </div>
@@ -63,8 +65,8 @@
         </div>
     </div>
     <div class="row col pt-3 d-flex justify-content-around">
-        <button type="submit" class="btn btn-primary" style="width: 100px; ">Add</button>
-        <button type="button" class="btn btn-success" style="width: 100px;"
+        <button type="submit" class="btn btn-success" style="width: 100px; ">Add</button>
+        <button *ngIf="isUserAuthenticated" type="button" class="btn btn-primary" style="width: 100px;"
             [routerLink]="['/window', 'edit', window.id]">Edit</button>
     </div>
 </form>

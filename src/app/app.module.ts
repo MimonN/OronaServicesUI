@@ -1,11 +1,12 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { CollapseModule } from 'ngx-bootstrap/collapse';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { WindowsListComponent } from './components/windows/windows-list/windows-list.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AddWindowComponent } from './components/windows/add-window/add-window.component';
 import { FormsModule } from '@angular/forms';
 import { EditWindowComponent } from './components/windows/edit-window/edit-window.component';
@@ -55,6 +56,14 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { WindowCardComponent } from './components/windows/window-card/window-card.component';
+import { ErrorHandlerService } from './shared/services/error-handler.service';
+import { JwtModule } from '@auth0/angular-jwt';
+import { PrivacyComponent } from './privacy/privacy.component';
+import { ForbiddenComponent } from './forbidden/forbidden.component';
+
+export function tokenGetter() {
+  return localStorage.getItem("token");
+}
 
 @NgModule({
   declarations: [
@@ -65,7 +74,9 @@ import { WindowCardComponent } from './components/windows/window-card/window-car
     EditWindowComponent,
     UploadComponent,
     UpdateImageComponent,
-    WindowCardComponent
+    WindowCardComponent,
+    PrivacyComponent,
+    ForbiddenComponent
   ],
   imports: [
     BrowserModule,
@@ -109,12 +120,26 @@ import { WindowCardComponent } from './components/windows/window-card/window-car
     MatTooltipModule,
     MatPaginatorModule,
     MatSortModule,
-    MatTableModule
+    MatTableModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        allowedDomains: ["localhost:5001"],
+        disallowedRoutes: []
+      }
+    }),
+    CollapseModule.forRoot()
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorHandlerService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
