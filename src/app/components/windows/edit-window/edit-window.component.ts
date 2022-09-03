@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Window } from 'src/app/models/window.model';
 import { WindowsService } from 'src/app/services/windows.service';
 
@@ -11,8 +12,10 @@ import { WindowsService } from 'src/app/services/windows.service';
 export class EditWindowComponent implements OnInit {
   windowDetails: Window;
   response: {dbPath: ''};
-
-  constructor(private route: ActivatedRoute, private windowsService: WindowsService, private router: Router) { }
+  modalRef?: BsModalRef;
+  message?: string;
+  
+  constructor(private route: ActivatedRoute, private windowsService: WindowsService, private router: Router, private modalService: BsModalService) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe({
@@ -29,6 +32,21 @@ export class EditWindowComponent implements OnInit {
         }
       }
     })
+  }
+
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template, {class: 'modal-dialog-centered'});
+  }
+ 
+  confirm(id: number): void {
+    this.message = 'Confirmed!';
+    this.deleteWindow(id);
+    this.modalRef?.hide();
+  }
+ 
+  decline(): void {
+    this.message = 'Declined!';
+    this.modalRef?.hide();
   }
 
   uploadFinished = (event) => {
