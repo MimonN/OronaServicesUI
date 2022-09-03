@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ContactUs } from '../models/contactUs/contactUs.model';
 import { ContactUsRequest } from '../models/contactUs/contactUsRequest.model';
+import { ContactUsUpdate } from '../models/contactUs/contactUsUpdate.model';
 
 @Injectable({
   providedIn: 'root'
@@ -23,5 +24,9 @@ export class ContactUsService {
 
   createContactUs(createContactUsRequest: ContactUsRequest) {
     return this.http.post<ContactUsRequest>(this.baseApiUrl + '/api/contactus/createcontactus', createContactUsRequest);
+  }
+
+  updateContactUs(id: number, contactUsUpdateRequest: ContactUs) {
+    return this.http.put<ContactUs>(this.baseApiUrl + '/api/contactus/updatecontactus/' + id, contactUsUpdateRequest);
   }
 }

@@ -54,14 +54,16 @@
           <div class="pt-3">
             <app-update-image (onUploadFinished)="uploadFinished($event)"></app-update-image>
           </div>
+          <div>
+            <button type="submit" class="btn btn-primary" style="width: 100px;">Save</button>
+            <button type="button" class="btn btn-danger ms-4" style="width: 100px;" (click)="openModal(template)">Delete</button>
+          </div>
           
-          <button type="submit" class="btn btn-primary">Save</button>
-          <button type="button" class="btn btn-danger" (click)="openModal(template)">Delete</button>
             <ng-template #template>
               <div class="modal-body text-center">
-                <p>Are you sure you want to delet window?</p>
-                <button type="button" class="btn btn-default" (click)="confirm(windowDetails.id)" >Yes</button>
-                <button type="button" class="btn btn-primary" (click)="decline()" >No</button>
+                <p>Are you sure you want to delete window?</p>
+                <button type="button" class="btn btn-default" (click)="confirm(windowDetails.id)">Yes</button>
+                <button type="button" class="btn btn-primary" (click)="decline()">No</button>
               </div>
             </ng-template>
 

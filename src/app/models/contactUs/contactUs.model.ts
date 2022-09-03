@@ -1,5 +1,5 @@
 export interface ContactUs {
-    id: string;
+    id: number;
     name: string;
     phone: number;
     email: string;

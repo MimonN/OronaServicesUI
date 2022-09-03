@@ -1,5 +1,8 @@
 <div class="container pt-5 text-center">
-    <button type="button" class="btn btn-success" routerLink="contactus-list">All Requests</button>
+    <ng-container *ngIf="isUserAuthenticated">
+        <button type="button" class="btn btn-success" routerLink="contactus-list">All Requests</button>
+    </ng-container>
+    
     <h2 class="pt-5">Please Fill In Request Callback Form</h2>
 
         <form #callbackForm="ngForm">

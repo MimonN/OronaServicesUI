@@ -11,6 +11,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { ContactUsListComponent } from './contact-us-list/contact-us-list.component';
 import { MatTableModule } from '@angular/material/table';
 import { ContacusDetailsComponent } from './contacus-details/contacus-details.component';
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -27,7 +28,10 @@ import { ContacusDetailsComponent } from './contacus-details/contacus-details.co
     MatInputModule,
     MatSelectModule,
     NgxMaskModule.forRoot(),
-    MatTableModule
+    MatTableModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-bottom-right'
+    })
   ]
 })
 export class ContactFormModule { }

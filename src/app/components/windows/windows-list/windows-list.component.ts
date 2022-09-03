@@ -1,6 +1,5 @@
-import { NgForOf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Window } from 'src/app/models/window.model';
+import { ToastrService } from 'ngx-toastr';
 import { WindowCalc } from 'src/app/models/windowCalc.model';
 import { WindowsService } from 'src/app/services/windows.service';
 import { AuthenticationService } from 'src/app/shared/services/authentication.service';
@@ -12,10 +11,12 @@ import { AuthenticationService } from 'src/app/shared/services/authentication.se
 })
 export class WindowsListComponent implements OnInit {
   windows: WindowCalc[] = [];
-  totalPrice: number = 0;
+  summary: number = 0;
+  tax: number = 0;
+  total: number = 0;
   public isUserAuthenticated: boolean;
 
-  constructor(private windowService: WindowsService, private authService: AuthenticationService) { }
+  constructor(private windowService: WindowsService, private authService: AuthenticationService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.windowService.getAllWindows()
@@ -31,6 +32,9 @@ export class WindowsListComponent implements OnInit {
   }
 
   addToTotalPrice(value: number){
-    this.totalPrice += value;
+    this.summary += value;
+    this.tax = this.summary * 0.0875;
+    this.total = this.summary + this.tax;
+    this.toastr.success('Total price has been updated.','Success!');
   }
 }

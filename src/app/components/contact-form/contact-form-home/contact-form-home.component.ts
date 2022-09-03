@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ContactUsRequest } from 'src/app/models/contactUs/contactUsRequest.model';
 import { ContactUsService } from 'src/app/services/contact-us.service';
+import { AuthenticationService } from 'src/app/shared/services/authentication.service';
 
 @Component({
   selector: 'app-contact-form-home',
@@ -18,10 +19,13 @@ export class ContactFormHomeComponent implements OnInit {
   isItAHomeOrBusiness: string;
   message: string;
   howDidYouHearAboutUs: string;
+  public isUserAuthenticated: boolean;
 
-  constructor(private contactUsService: ContactUsService, private router: Router, private toastr: ToastrService) { }
+  constructor(private contactUsService: ContactUsService, private router: Router, private toastr: ToastrService,
+    private authService: AuthenticationService) { }
 
   ngOnInit(): void {
+    this.isUserAuthenticated = this.authService.isUserAuthenticated();
   }
 
   onRequest = (value) => {

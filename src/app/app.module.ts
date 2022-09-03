@@ -62,6 +62,8 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { PrivacyComponent } from './privacy/privacy.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { ToastrModule } from 'ngx-toastr';
+import { HomePageComponent } from './home-page/home-page.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 export function tokenGetter() {
   return localStorage.getItem("token");
@@ -78,7 +80,9 @@ export function tokenGetter() {
     UpdateImageComponent,
     WindowCardComponent,
     PrivacyComponent,
-    ForbiddenComponent
+    ForbiddenComponent,
+    HomePageComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -132,7 +136,9 @@ export function tokenGetter() {
     }),
     CollapseModule.forRoot(),
     ModalModule.forRoot(),
-    ToastrModule.forRoot()
+    ToastrModule.forRoot({
+      positionClass: 'toast-bottom-right'
+    })
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

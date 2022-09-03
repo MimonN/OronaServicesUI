@@ -9,7 +9,7 @@
       <p>Is is a home or business?: <b>{{contactUsDetails.isItAHomeOrBusiness}}</b></p>
     </div>
 
-    <form #requestDetailsForm="ngForm" class="pt-4">
+    <form #updateContactUsForm="ngForm" class="pt-4" (ngSubmit)="updateContactUs()">
 
         <mat-form-field class="col-12 col-md-7"  appearance="fill">
             <mat-label>Name</mat-label>
@@ -50,7 +50,9 @@
             <textarea matInput [(ngModel)]="contactUsDetails.note" name="note" #note="ngModel"></textarea>
           </mat-form-field>
 
-          
+          <div>
+            <button type="submit" class="btn btn-primary" style="width: 100px">Update</button>
+          </div>
 
-    </form>
+    </form >
 </div>

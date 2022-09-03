@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { ContactUs } from 'src/app/models/contactUs/contactUs.model';
+import { ContactUsUpdate } from 'src/app/models/contactUs/contactUsUpdate.model';
 import { ContactUsService } from 'src/app/services/contact-us.service';
 
 @Component({
@@ -25,7 +27,7 @@ export class ContacusDetailsComponent implements OnInit {
   };
   
 
-  constructor(private contactUsService: ContactUsService, private route: ActivatedRoute) { }
+  constructor(private contactUsService: ContactUsService, private route: ActivatedRoute, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe({
@@ -42,6 +44,14 @@ export class ContacusDetailsComponent implements OnInit {
         }
       }
     })
+  }
+
+  updateContactUs() {
+    this.contactUsService.updateContactUs(this.contactUsDetails.id, this.contactUsDetails).subscribe({
+      next: (response) => {
+        this.toastr.success('ContactUs form has been updated.','Success!');
+      }
+    });
   }
 
 }
