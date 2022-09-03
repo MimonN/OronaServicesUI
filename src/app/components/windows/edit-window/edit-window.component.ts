@@ -1,6 +1,7 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { ToastrService } from 'ngx-toastr';
 import { Window } from 'src/app/models/window.model';
 import { WindowsService } from 'src/app/services/windows.service';
 
@@ -15,7 +16,8 @@ export class EditWindowComponent implements OnInit {
   modalRef?: BsModalRef;
   message?: string;
   
-  constructor(private route: ActivatedRoute, private windowsService: WindowsService, private router: Router, private modalService: BsModalService) { }
+  constructor(private route: ActivatedRoute, private windowsService: WindowsService, private router: Router, private modalService: BsModalService,
+    private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe({
@@ -61,6 +63,7 @@ export class EditWindowComponent implements OnInit {
     this.windowsService.updateWindow(this.windowDetails.id, this.windowDetails).subscribe({
       next: (response) => {
         this.router.navigate(['windows']);
+        this.toastr.success('Your window changes has been successfully saved.','Success!');
       }
     });
   }

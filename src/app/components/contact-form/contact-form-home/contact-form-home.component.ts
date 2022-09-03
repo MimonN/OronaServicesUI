@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { ContactUsRequest } from 'src/app/models/contactUs/contactUsRequest.model';
 import { ContactUsService } from 'src/app/services/contact-us.service';
 
@@ -18,7 +19,7 @@ export class ContactFormHomeComponent implements OnInit {
   message: string;
   howDidYouHearAboutUs: string;
 
-  constructor(private contactUsService: ContactUsService, private router: Router) { }
+  constructor(private contactUsService: ContactUsService, private router: Router, private toastr: ToastrService) { }
 
   ngOnInit(): void {
   }
@@ -38,6 +39,7 @@ export class ContactFormHomeComponent implements OnInit {
     .subscribe({
       next: (_) => {
         this.router.navigate(['windows']);
+        this.toastr.success('Thank You! Your request has been sent.','Success!');
       }
     });
     

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { WindowToCreate } from 'src/app/models/windowToCreate.model';
 import { WindowsService } from 'src/app/services/windows.service';
 
@@ -17,7 +18,7 @@ export class AddWindowComponent implements OnInit {
   postConstructionPrice: number;
   response: {dbPath: ''};
 
-  constructor(private windowService: WindowsService, private router: Router) { }
+  constructor(private windowService: WindowsService, private router: Router, private toastr: ToastrService) { }
 
   ngOnInit(): void {
   }
@@ -40,6 +41,7 @@ export class AddWindowComponent implements OnInit {
       .subscribe({
         next: (window) => {
           this.router.navigate(['windows']);
+          this.toastr.success('Your window changes has been successfully created.','Success!');
         }
       });
   }

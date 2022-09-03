@@ -61,6 +61,7 @@ import { ErrorHandlerService } from './shared/services/error-handler.service';
 import { JwtModule } from '@auth0/angular-jwt';
 import { PrivacyComponent } from './privacy/privacy.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
+import { ToastrModule } from 'ngx-toastr';
 
 export function tokenGetter() {
   return localStorage.getItem("token");
@@ -130,7 +131,8 @@ export function tokenGetter() {
       }
     }),
     CollapseModule.forRoot(),
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    ToastrModule.forRoot()
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
