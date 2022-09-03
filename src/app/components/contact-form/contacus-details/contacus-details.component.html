@@ -3,7 +3,7 @@
 
     <div class="row">
       <p>Requested: <b>{{contactUsDetails.createTime | date : "medium"}}</b></p>
-      <p *ngIf="!contactUsDetails.editTime === null">Edited: <b>{{contactUsDetails.editTime | date : "medium"}}</b></p>
+      <p *ngIf="contactUsDetails.editTime">Edited: <b>{{contactUsDetails.editTime | date : "medium"}}</b></p>
       <p>Message: <b>{{contactUsDetails.message}}</b></p>
       <p>Hot did you hear about us?: <b>{{contactUsDetails.howDidYouHearAboutUs}}</b></p>
       <p>Is is a home or business?: <b>{{contactUsDetails.isItAHomeOrBusiness}}</b></p>
